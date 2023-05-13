@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Age Calculator Tool</title>
+</head>
+<body>
+	<h1>Age Calculator Tool</h1>
+	<p>Please enter your birthdate in the following format: YYYY-MM-DD</p>
+	<form>
+		<label for="birthdate">Birthdate:</label>
+		<input type="text" id="birthdate" name="birthdate">
+		<button type="submit" id="calculate">Calculate</button>
+	</form>
+	<p id="age"></p>
+	<script>
+		document.getElementById("calculate").addEventListener("click", function(event) {
+			event.preventDefault();
+			var birthdate = document.getElementById("birthdate").value;
+			var age = calculateAge(birthdate);
+			document.getElementById("age").innerHTML = "Your age is: " + age + " years old.";
+		});
+
+		function calculateAge(birthdate) {
+			var today = new Date();
+			var birthdateObj = new Date(birthdate);
+			var age = today.getFullYear() - birthdateObj.getFullYear();
+			var monthDiff = today.getMonth() - birthdateObj.getMonth();
+			if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdateObj.getDate())) {
+				age--;
+			}
+			return age;
+		}
+	</script>
+</body>
+</html>
